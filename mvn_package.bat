@@ -1,0 +1,1 @@
+mvn -e clean package && pause
