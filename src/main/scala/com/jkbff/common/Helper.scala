@@ -17,6 +17,11 @@ object Helper {
 			resource.close()
 		}
 	}
+	
+	def init[T](resource: T)(op: T => Any): T = {
+		op(resource)
+		resource
+	}
 
 	def sqlSearchBuilder(column: String, searchTerms: Array[String]): (String, Seq[String]) = {
 		searchTerms.foldLeft(("", Seq[String]())) { case ((acc, params), searchTerm) =>
@@ -58,11 +63,11 @@ object Helper {
 	}
 	
 	def getDataSource(driver: String, username: String, password: String, connectionString: String): DataSource = {
-		val ds = new BasicDataSource()
-		ds.setDriverClassName(driver)
-		ds.setUrl(connectionString)
-		ds.setUsername(username)
-		ds.setPassword(password)
-		ds
+		init(new BasicDataSource()) { ds =>
+			ds.setDriverClassName(driver)
+			ds.setUrl(connectionString)
+			ds.setUsername(username)
+			ds.setPassword(password)
+		}
 	}
 }

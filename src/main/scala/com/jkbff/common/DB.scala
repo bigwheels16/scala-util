@@ -38,6 +38,10 @@ class DB(ds: DataSource) {
 			}
 		}
 	}
+	
+	def exists(sql: String, params: Seq[Any]): Boolean = {
+		querySingle(sql, params, { rs => true }).getOrElse(false)
+	}
 
 	def call[T](sql: String, params: Seq[Any], rowMapper: ResultSet => T): List[T] = {
 		logQuery(sql, params)
