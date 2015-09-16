@@ -1,15 +1,22 @@
 package com.jkbff.common
 
 import java.lang.reflect.Method
-import java.sql.Connection
-
-import scala.Array.canBuildFrom
+import javax.sql.DataSource
 
 import org.apache.commons.dbcp.BasicDataSource
 
-import javax.sql.DataSource
+import scala.Array.canBuildFrom
 
 object Helper {
+	def using[T <: { def close(): Any }, U](resource: T, message: String)(op: T => U): U = {
+		try {
+			using(resource)(op)
+		} catch {
+			case e: Exception =>
+				throw new RuntimeException(message, e)
+		}
+	}
+
 	def using[T <: { def close(): Any }, U](resource: T)(op: T => U): U = {
 		try {
 			op(resource)
@@ -17,7 +24,7 @@ object Helper {
 			resource.close()
 		}
 	}
-	
+
 	def init[T](resource: T)(op: T => Any): T = {
 		op(resource)
 		resource

@@ -84,7 +84,13 @@ class ObjectPrinterTest extends FunSuite {
 
 		val expected = "obj: java.util.HashMap = \n  [second]: String = a2\n  [third]: String = a3\n  [first]: String = a1\n"
 
-		assert(objectPrinter.printObj(map, true) == expected)
+		val result = objectPrinter.printObj(map, true)
+
+		assert(expected.length == result.length)
+		assert(result.startsWith("obj: java.util.HashMap = \n  "))
+		assert(result.contains("[first]: String = a1\n"))
+		assert(result.contains("[second]: String = a2\n"))
+		assert(result.contains("[third]: String = a3\n"))
 	}
 
 	test("printObj for a complex object") {

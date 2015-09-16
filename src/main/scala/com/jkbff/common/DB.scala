@@ -17,7 +17,7 @@ class DB(ds: DataSource) {
 
 	def query[T](sql: String, params: Seq[Any], rowMapper: ResultSet => T): List[T] = {
 		logQuery(sql, params)
-		using(connection.prepareStatement(sql)) { stmt =>
+		using(connection.prepareStatement(sql), "Failed to execute sql: " + sql) { stmt =>
 			setParams(stmt, params)
 			using(stmt.executeQuery()) { rs =>
 				new ResultSetIterator(rs).map(rowMapper).toList
@@ -27,7 +27,7 @@ class DB(ds: DataSource) {
 
 	def querySingle[T](sql: String, params: Seq[Any], rowMapper: ResultSet => T): Option[T] = {
 		logQuery(sql, params)
-		using(connection.prepareStatement(sql)) { stmt =>
+		using(connection.prepareStatement(sql), "Failed to execute sql: " + sql) { stmt =>
 			setParams(stmt, params)
 			using(stmt.executeQuery()) { rs =>
 				if (rs.next()) {
@@ -45,7 +45,7 @@ class DB(ds: DataSource) {
 
 	def call[T](sql: String, params: Seq[Any], rowMapper: ResultSet => T): List[T] = {
 		logQuery(sql, params)
-		using(connection.prepareStatement(sql)) { stmt =>
+		using(connection.prepareStatement(sql), "Failed to execute sql: " + sql) { stmt =>
 			setParams(stmt, params)
 			using(stmt.executeQuery()) { rs =>
 				new ResultSetIterator(rs).map(rowMapper).toList
@@ -55,7 +55,7 @@ class DB(ds: DataSource) {
 
 	def call[T](sql: String, params: Seq[Any]): Unit = {
 		logQuery(sql, params)
-		using(connection.prepareCall(sql)) { stmt =>
+		using(connection.prepareCall(sql), "Failed to execute sql: " + sql) { stmt =>
 			setParams(stmt, params)
 			stmt.executeUpdate()
 		}
@@ -70,7 +70,7 @@ class DB(ds: DataSource) {
 
 	def update(sql: String, params: Seq[Any]): Int = {
 		logQuery(sql, params)
-		using(connection.prepareStatement(sql)) { stmt =>
+		using(connection.prepareStatement(sql), "Failed to execute sql: " + sql) { stmt =>
 			setParams(stmt, params)
 			stmt.executeUpdate()
 		}
