@@ -3,7 +3,7 @@ package test.com.jkbff.common
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
 import com.jkbff.common.EnrichedString
-import org.scalatest.junit.JUnitRunner
+import org.scalatestplus.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
 class EnrichedStringTest extends FunSuite {

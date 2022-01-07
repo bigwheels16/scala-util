@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.jkbff.common</groupId>
 	<artifactId>scala-util</artifactId>
-	<version>1.3</version>
-	
+	<version>1.4</version>
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<releaseDir>${project.build.directory}/release/${project.artifactId}-${project.version}</releaseDir>
@@ -17,9 +17,9 @@
 			<version>2.12.8</version>
 		</dependency>
 		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.16</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.32</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>
@@ -30,13 +30,13 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13.1</version>
+			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.scalatest</groupId>
 			<artifactId>scalatest_2.12</artifactId>
-			<version>3.0.6</version>
+			<version>3.2.9</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

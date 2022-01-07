@@ -2,9 +2,9 @@ package test.com.jkbff.common
 
 import org.junit.runner.RunWith
 import org.scalatest.FunSuite
-import org.scalatest.junit.JUnitRunner
 import com.jkbff.common.ObjectPrinter
 import com.jkbff.common.Printer
+import org.scalatestplus.junit.JUnitRunner
 
 @RunWith(classOf[JUnitRunner])
 class ObjectPrinterTest extends FunSuite {

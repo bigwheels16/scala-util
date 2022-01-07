@@ -3,12 +3,13 @@ package com.jkbff.common
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import com.jkbff.common.Helper.using
+import org.slf4j.LoggerFactory
+
 import javax.sql.DataSource
 import java.util.regex.Matcher
-import org.apache.log4j.Logger
 
 class DB(ds: DataSource) {
-	private val log = Logger.getLogger(getClass())
+	private val log = LoggerFactory.getLogger(getClass())
 	val connection = ds.getConnection()
 
 	def query[T](sql: String, rowMapper: ResultSet => T): List[T] = {
